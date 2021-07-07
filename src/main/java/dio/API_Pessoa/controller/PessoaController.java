@@ -1,14 +1,19 @@
 package dio.API_Pessoa.controller;
 
+import dio.API_Pessoa.dto.PessoaDTO;
 import dio.API_Pessoa.dto.RespostaDTO;
 import dio.API_Pessoa.entity.Pessoa;
 import dio.API_Pessoa.service.PessoaService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("api/v1/pessoa")
+//@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PessoaController {
 
     @Autowired
@@ -22,9 +27,10 @@ public class PessoaController {
 
     @PostMapping("/inserir")
     @ResponseStatus(HttpStatus.CREATED)
-    public RespostaDTO criarPessoa(@RequestBody Pessoa pessoa)
+    public RespostaDTO criarPessoa(@RequestBody @Valid PessoaDTO pessoaDTO)
     {
-        return servicoPessoa.criarPessoa( pessoa );
+        return servicoPessoa.criarPessoa( pessoaDTO );
     }
+
 
 }
