@@ -1,5 +1,6 @@
 package dio.API_Pessoa.controller;
 
+import dio.API_Pessoa.dto.MensagemRespostaDTO;
 import dio.API_Pessoa.dto.PessoaDTO;
 import dio.API_Pessoa.dto.RespostaDTO;
 import dio.API_Pessoa.entity.Pessoa;
@@ -52,6 +53,11 @@ public class PessoaController {
     public void excluirDadosPessoaPorID( @PathVariable("idPessoa") Long idPessoa ) throws ExcecaoPessoaNaoEncontrada {
         servicoPessoa.removerDadoPessoaPorID(idPessoa);
     }
-
+    //-----------------------------------------------------------------------------------
+    @PutMapping("/{idPessoa}")
+    public MensagemRespostaDTO atualizarPorID(@PathVariable("idPessoa") Long idPessoa,
+                                              @RequestBody @Valid PessoaDTO pessoaDTO ) throws ExcecaoPessoaNaoEncontrada {
+        return servicoPessoa.atualizarPessoaPorID( idPessoa, pessoaDTO );
+    }
     //-----------------------------------------------------------------------------------
 }

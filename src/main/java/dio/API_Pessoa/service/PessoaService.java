@@ -1,5 +1,6 @@
 package dio.API_Pessoa.service;
 
+import dio.API_Pessoa.dto.MensagemRespostaDTO;
 import dio.API_Pessoa.dto.PessoaDTO;
 import dio.API_Pessoa.dto.RespostaDTO;
 import dio.API_Pessoa.entity.Pessoa;
@@ -76,6 +77,19 @@ public class PessoaService {
     public void removerDadoPessoaPorID(Long idPessoa) throws ExcecaoPessoaNaoEncontrada {
         Pessoa pessoa = verificarSePessoaExiste(idPessoa);
         repositorioPessoa.deleteById( pessoa.getId() );
+    }
+    //-----------------------------------------------------------------------------------
+    public MensagemRespostaDTO atualizarPessoaPorID(Long idPessoa, PessoaDTO pessoaDTO) throws ExcecaoPessoaNaoEncontrada {
+
+        verificarSePessoaExiste( idPessoa );
+
+        Pessoa dadoPessoa = pessoaMapper.toModel( pessoaDTO );
+        Pessoa novaPessoa = repositorioPessoa.save( dadoPessoa );
+
+        return MensagemRespostaDTO
+                    .builder()
+                    .mensagem( "> Pessoa de ID <" + novaPessoa.getId() +"> atualizada!" )
+                    .build();
     }
     //-----------------------------------------------------------------------------------
 
