@@ -19,11 +19,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PessoaService {
     //-----------------------------------------------------------------------------------
-    @Autowired
-    private PessoaRepository repositorioPessoa;
-
-    @Autowired
-    private PessoaMapper pessoaMapper;
+    private final PessoaRepository repositorioPessoa;
+    private final PessoaMapper pessoaMapper;
     //-----------------------------------------------------------------------------------
     public RespostaDTO criarPessoa(PessoaDTO pessoaDTO)
     {
