@@ -3,6 +3,7 @@ package dio.API_Pessoa.controller;
 import dio.API_Pessoa.dto.PessoaDTO;
 import dio.API_Pessoa.dto.RespostaDTO;
 import dio.API_Pessoa.entity.Pessoa;
+import dio.API_Pessoa.exception.ExcecaoPessoaNaoEncontrada;
 import dio.API_Pessoa.service.PessoaService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,9 @@ public class PessoaController {
         return lstPessoasDTO;
     }
     //-----------------------------------------------------------------------------------
-    
+    @GetMapping("/{idPessoa}")
+    public PessoaDTO pesquisarPorID( @PathVariable("idPessoa") Long idPessoa ) throws ExcecaoPessoaNaoEncontrada {
+        return servicoPessoa.pesquisarPorID(idPessoa);
+    }
+    //-----------------------------------------------------------------------------------
 }

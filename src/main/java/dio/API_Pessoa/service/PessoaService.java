@@ -3,6 +3,7 @@ package dio.API_Pessoa.service;
 import dio.API_Pessoa.dto.PessoaDTO;
 import dio.API_Pessoa.dto.RespostaDTO;
 import dio.API_Pessoa.entity.Pessoa;
+import dio.API_Pessoa.exception.ExcecaoPessoaNaoEncontrada;
 import dio.API_Pessoa.mapper.PessoaMapper;
 import dio.API_Pessoa.repository.PessoaRepository;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +46,26 @@ public class PessoaService {
                                             .collect(Collectors.toList() );
 
         return lstPessoasDTO;
+    }
+    //-----------------------------------------------------------------------------------
+    public PessoaDTO pesquisarPorID(Long idPessoa) throws ExcecaoPessoaNaoEncontrada {
+
+        /*
+        Optional<Pessoa> pessoa = repositorioPessoa.findById( idPessoa );
+
+        if( pessoa.isEmpty() ) {
+            throw new ExcecaoPessoaNaoEncontrada( idPessoa );
+        }
+
+        PessoaDTO pessoaDTO = pessoaMapper.toDTO( pessoa.get() );
+        */
+
+        Pessoa pessoa = repositorioPessoa.findById( idPessoa )
+                            .orElseThrow( () -> new ExcecaoPessoaNaoEncontrada( idPessoa ) );
+
+        PessoaDTO pessoaDTO = pessoaMapper.toDTO( pessoa );
+
+        return pessoaDTO;
     }
     //-----------------------------------------------------------------------------------
 
