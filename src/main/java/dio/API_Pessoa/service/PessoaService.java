@@ -60,12 +60,22 @@ public class PessoaService {
         PessoaDTO pessoaDTO = pessoaMapper.toDTO( pessoa.get() );
         */
 
-        Pessoa pessoa = repositorioPessoa.findById( idPessoa )
-                            .orElseThrow( () -> new ExcecaoPessoaNaoEncontrada( idPessoa ) );
+        Pessoa pessoa = verificarSePessoaExiste(idPessoa);
 
         PessoaDTO pessoaDTO = pessoaMapper.toDTO( pessoa );
 
         return pessoaDTO;
+    }
+    //-----------------------------------------------------------------------------------
+    private Pessoa verificarSePessoaExiste(Long idPessoa) throws ExcecaoPessoaNaoEncontrada {
+        return repositorioPessoa.findById(idPessoa)
+                .orElseThrow(() -> new ExcecaoPessoaNaoEncontrada(idPessoa));
+    }
+
+    //-----------------------------------------------------------------------------------
+    public void removerDadoPessoaPorID(Long idPessoa) throws ExcecaoPessoaNaoEncontrada {
+        Pessoa pessoa = verificarSePessoaExiste(idPessoa);
+        repositorioPessoa.deleteById( pessoa.getId() );
     }
     //-----------------------------------------------------------------------------------
 

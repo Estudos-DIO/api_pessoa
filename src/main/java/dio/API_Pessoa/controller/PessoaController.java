@@ -47,4 +47,11 @@ public class PessoaController {
         return servicoPessoa.pesquisarPorID(idPessoa);
     }
     //-----------------------------------------------------------------------------------
+    @DeleteMapping("/{idPessoa}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void excluirDadosPessoaPorID( @PathVariable("idPessoa") Long idPessoa ) throws ExcecaoPessoaNaoEncontrada {
+        servicoPessoa.removerDadoPessoaPorID(idPessoa);
+    }
+
+    //-----------------------------------------------------------------------------------
 }
