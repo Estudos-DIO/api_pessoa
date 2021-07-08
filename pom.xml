@@ -14,7 +14,7 @@
 	<name>API_Pessoa</name>
 	<description>API para manipulação de dados a respeito de pessoas</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>14</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

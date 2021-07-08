@@ -10,12 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/pessoa")
 //@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PessoaController {
-
+    //-----------------------------------------------------------------------------------
     @Autowired
     private PessoaService servicoPessoa;
 
@@ -24,13 +25,21 @@ public class PessoaController {
     {
         return "API_Pessoa Test!";
     }
-
+    //-----------------------------------------------------------------------------------
     @PostMapping("/inserir")
     @ResponseStatus(HttpStatus.CREATED)
     public RespostaDTO criarPessoa(@RequestBody @Valid PessoaDTO pessoaDTO)
     {
         return servicoPessoa.criarPessoa( pessoaDTO );
     }
+    //-----------------------------------------------------------------------------------
+    @GetMapping("/todas")
+    public List<PessoaDTO> listarTodos() {
 
+        List<PessoaDTO> lstPessoasDTO = servicoPessoa.listarTodasPessoas();
 
+        return lstPessoasDTO;
+    }
+    //-----------------------------------------------------------------------------------
+    
 }
